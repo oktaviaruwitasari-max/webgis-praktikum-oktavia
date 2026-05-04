@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Geospatial Mashup</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        // --- Inisialisasi Peta ---
+        var mymap = L.map('map').setView([-7.666001, 110.418420], 14);
+        // --- Basemap OpenStreetMap ---
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+                'OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+        // --- Marker (Objek Titik) ---
+        var marker = L.marker([-7.729718876886153, 110.35969006578182]).addTo(mymap);
+        marker.bindPopup('<b>Lokasi A</b><br>Deskripsi lokasi.');
+        // --- Circle (Objek Lingkaran) ---
+        var circle = L.circle([-7.549954890847829, 110.8457726969337], {
+            color: '#FF1493', fillColor: '#FFC0CB',
+            fillOpacity: 0.5, radius: 15000
+        }).addTo(mymap);
+        circle.bindPopup('Radius 200 m dari titik ini.');
+        // --- Polygon (Objek Area) ---
+        var polygon = L.polygon([
+            [-7.8018992975562895, 110.85330060846559], [-8.085495729338447, 110.85330060846559],
+            [-8.085495729338447, 111.18440312874179], [-7.8018992975562895, 111.18440312874179]
+        ], { color: '#2E8B58', fillColor: '#00FF7F', fillOpacity: 0.3 })
+            .addTo(mymap);
+        polygon.bindPopup('Area Kawasan A');
+        // --- Polyline (Objek Garis) ---
+        var polyline = L.polyline([
+            [-7.910555557377137, 110.35326224548345], [-7.937200909740312, 110.46338750676802],
+            [-7.898915245853416, 110.46964271140052], [-7.882826674367891, 110.44330123632813]
+        ], { color: '#FF0000', weight: 3, opacity: 0.8 })
+            .addTo(mymap);
+        polyline.bindPopup('Jalur A');
+    </script>
+</body>
+
+</html>
